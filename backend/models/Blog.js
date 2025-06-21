@@ -5,7 +5,7 @@ const blogSchema = new mongose.Schema({
     title: {
         type: String,
         required: true
-    }, subTitile: {
+    }, subTitle: {
         type: String
     }, description : {
         type: String,
