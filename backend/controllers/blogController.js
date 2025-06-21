@@ -2,6 +2,7 @@ import fs from 'fs'
 import imagekit from '../config/imageKit.js';
 import Blog from '../models/Blog.js';
 import { json } from 'stream/consumers';
+import Comment from '../models/Comment.js';
 
 export const addBlog = async(req, res) => {
     try {
@@ -91,6 +92,11 @@ export const deleteBlogById = async(req, res) => {
     try {
         const {id} = req.body;
         await Blog.findByIdAndDelete(id);
+
+        //deleting comment
+        await Comment.deleteMany({
+            blog: id
+        });
         
         res.json({
             success: true,
@@ -113,6 +119,44 @@ export const togglePublish = async(req, res) => {
         res.json({
             success: true,
             message: "Blog status updated"
+        })
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+export const addComment = async(req, res) => {
+    try {
+        const {blog, name, content} = req.body;
+        await Comment.create({
+            blog, name, content
+        })
+        res.json({
+            success: true,
+            message: "Comment added for review"
+        })
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
+export const getBlogComments = async(req, res) => {
+    try {
+        const {blogId} = req.body;
+        const comments = await Comment.find({
+            blog: blogId, isApprovedL: true
+        }).sort({
+            createdAt: -1
+        })
+        res.json({
+            success: true,
+            comments
         })
     } catch (error) {
         res.json({
