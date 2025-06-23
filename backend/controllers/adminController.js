@@ -94,7 +94,7 @@ export const deleteCommentById = async(req, res) => {
 export const approveCommentById = async(req, res) => {
     try {
         const {id} = req.body;
-        await Comment.findByIdAndDelete(id, {
+        await Comment.findByIdAndUpdate(id, {
             isApproved: true
         })
         res.json({

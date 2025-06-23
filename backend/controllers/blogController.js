@@ -150,7 +150,7 @@ export const getBlogComments = async(req, res) => {
     try {
         const {blogId} = req.body;
         const comments = await Comment.find({
-            blog: blogId, isApprovedL: true
+            blog: blogId, isApproved: true
         }).sort({
             createdAt: -1
         })
