@@ -9,7 +9,9 @@ const app = express();
 
 await connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://blog-ai-beige.vercel.app'
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
