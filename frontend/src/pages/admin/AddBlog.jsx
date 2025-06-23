@@ -3,11 +3,13 @@ import { assets, blogCategories } from '../../assets/assets'
 import Quill from 'quill';
 import { useAppContext } from '../../../context/AppContext';
 import toast from 'react-hot-toast';
+import {parse} from 'marked'
 
 const AddBlog = () => {
 
    const {axios} = useAppContext()
    const [isAdding, setIsAdding] = useState(false);  // disable the button till backend responds
+   const [loading, setLoading] = useState(false)
 
    const editorRef = useRef(null);
    const quillRef = useRef(null);
@@ -38,6 +40,7 @@ const AddBlog = () => {
           toast.success(data.message);
           setImage(false)
           setTitle('')
+          setsubTitle('')
           quillRef.current.root.innerHTML = ''
           setCategory('Startup')
         } else {
@@ -51,7 +54,20 @@ const AddBlog = () => {
     }
 
     const generateConent = async (e) => {
-
+      if(!title) return toast.error('Please enter your title')
+        try {
+          setLoading(true);
+          const {data} = await axios.post('/api/blog/generate', {prompt: title})
+          if(data.success){
+            quillRef.current.root.innerHTML =  parse(data.content)
+          } else {
+            toast.error(data.message)
+          }
+        } catch (error) {
+          toast.error(data.error)
+        } finally {
+          setLoading(false)
+        }
     }
 
     useEffect(()=>{
@@ -74,21 +90,28 @@ const AddBlog = () => {
             onChange={e => setTitle(e.target.value)} value={title}/>
         
         <p className='mt-4'>Blog subtitle</p>
-            <input type="text" placeholder='Type here' required className='w-full
+            <input type="text" placeholder='Type here' className='w-full
             max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded' 
             onChange={e => setsubTitle(e.target.value)} value={subTitle}/>
             
         <p className='mt-4'>Blog content</p>
         <div className='max-w-lg h-74 pb-16 sm:pb-10 pt-2 relative'>
           <div ref={editorRef}></div>
-          <button type='button' onClick={generateConent}
+          {loading && (
+            <div className='absolute right-0 top-0 left-0 bottom-0 flex items-center justify-center bg-black/10 mt-2'>
+              <div className='w-8 h-8 rounded-full border-2 border-t-white animate-spin'>
+              </div>
+
+            </div>
+        )}
+          <button disabled={loading} type='button' onClick={generateConent}
           className='absolute bottom-1 right-2 ml-2 text-xs text-white bg-black/70 px-4 py-1.5
           rounded hover:underline cursor-pointer'>Generate with AI</button>
         </div>  
 
         <div>
           <p className='mt-4'>Blog category</p>
-          <select onChange={e => e.target.value} name="category" className='mt-2 px-3 py-2 border text-gray-500 border-gray-300
+          <select onChange={e => setCategory(e.target.value)} value={category} name="category" className='mt-2 px-3 py-2 border text-gray-500 border-gray-300
           outline-none rounded'>
             <option value="">Select category</option>
             {blogCategories.map((item, index)=>{
