@@ -13,7 +13,7 @@ const Blog = () => {
 
   const {id} = useParams();
 
-  const {axios} = useAppContext()
+  const {axios, userName, token} = useAppContext()
 
   const [data, setData] = useState(null);
   const [comments, setComments] = useState([]);
@@ -47,7 +47,7 @@ const Blog = () => {
     e.preventDefault();
     try {
       const {data} = await axios.post('/api/blog/add-comment', {
-        blog: id, name, content
+        blog: id, name: userName || name, content
       })
       if(data.success){
         toast.success(data.message)
@@ -75,7 +75,7 @@ const Blog = () => {
         <h1 className='text-2x1 sm:text-5xl font-semibold max-w-2xl mx-auto text-gray-800'>{data.title}</h1>
         <h2 className='my-5 max-w-lg truncate mx-auto'>{data.subTitle}</h2>
         <p className='inline-block py-1 px-4 rounded-full mb-6 border text-sm
-         border-primary/35 bg-primary/5 font-medium text-primary'>Aakarsh</p>
+         border-primary/35 bg-primary/5 font-medium text-primary'>{data.author || 'Unknown'}</p>
       </div>
       <div className='mx-5 max-w-5xl md:mx-auto my-10 mt-6'>
         <img src={data.image} alt="" className='rounded-3xl mb-5'/>
@@ -103,14 +103,14 @@ const Blog = () => {
         <div className='max-w-3xl mx-auto'>
             <p className='font-semibold mb-4'>Add your comment</p>
             <form onSubmit={addComment} className='flex flex-col items-start gap-4 max-w-lg'>
-              <input onChange={(e) => setName(e.target.value)} value={name}
-              type='text' placeholder='Name' required className='w-full
-              p-2 border border-gray-300 rounded outline-none'/>
-
+              {(!userName || !token) && (
+                <input onChange={(e) => setName(e.target.value)} value={name}
+                type='text' placeholder='Name' required className='w-full
+                p-2 border border-gray-300 rounded outline-none'/>
+              )}
               <textarea onChange={(e) => setContent(e.target.value)} value={content}
               placeholder='Comment' className='w-full p-2 border
               border-gray-300 rounded outline-none h-48' required></textarea>
-              
               <button type='submit' className='bg-primary text-white rounded p-2
               px-8 hover: scale-102 transition-all cursor-pointer'>Submit</button>
             </form>

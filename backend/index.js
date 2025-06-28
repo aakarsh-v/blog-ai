@@ -2,8 +2,13 @@ import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
 import connectDB from './config/db.js';
+// Import models to ensure they're registered
+import './models/User.js';
+import './models/Blog.js';
+import './models/Comment.js';
 import router from './routes/adminRoutes.js';
 import blogRouter from './routes/blogRoutes.js';
+import authRouter from './routes/authRoutes.js';
 
 const app = express();
 
@@ -20,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/admin', router);
 app.use('/api/blog', blogRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on port: ${PORT}`)

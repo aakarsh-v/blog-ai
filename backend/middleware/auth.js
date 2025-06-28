@@ -1,16 +1,27 @@
 import jwt from 'jsonwebtoken'
 
 const auth = (req, res, next) => {
-    const token = req.headers.authorization;
-
+    req.user = null;
+    const auth = req.headers['authorization'];
+    console.log('AUTH HEADER:', auth);
+    if(!auth){
+        return res.status(403)
+            .json({
+                message: "Authorization header is missing"
+            })
+    }
     try {
-        jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(auth, process.env.JWT_SECRET);
+        console.log('DECODED JWT:', decoded);
+        req.user = decoded;
         next();
     } catch (error) {
-        res.json({
-            success: false,
-            message: "Invalid token"
-        })
+        console.log('JWT ERROR:', error.message);
+        return res.status(403)
+            .json({
+                message: "Invalid token",
+                error: error.message
+            })
     }
 }
 

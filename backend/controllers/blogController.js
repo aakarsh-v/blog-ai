@@ -4,11 +4,17 @@ import Blog from '../models/Blog.js';
 import { json } from 'stream/consumers';
 import Comment from '../models/Comment.js';
 import main from '../config/gemini.js'
+import User from '../models/User.js';
 
 export const addBlog = async(req, res) => {
     try {
+        console.log('addBlog req.user:', req.user);
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ success: false, message: "Unauthorized: User not found" });
+        }
         const {title, subTitle, description, category, isPublished} = JSON.parse(req.body.blog);
         const imageFile = req.file;
+        const userId = req.user._id;
 
         if(!title || !description  || !category || !imageFile){
             return res.json({
@@ -37,8 +43,13 @@ export const addBlog = async(req, res) => {
         })
 
         const image = optimizedImageUrl;
+        const user = await User.findById(userId);
+        const author = user ? user.name : 'Blog-ai Admin';
         
-        await Blog.create({title, subTitle, description, category, image, isPublished})
+        const newBlog = new Blog({
+            title, subTitle, description, category, image, isPublished, user: userId, author
+        });
+        await newBlog.save();
 
         res.json({
             success: true,
@@ -131,19 +142,41 @@ export const togglePublish = async(req, res) => {
 
 export const addComment = async(req, res) => {
     try {
-        const {blog, name, content} = req.body;
+        let userId = null;
+        let name = req.body.name || 'Unknown';
+
+        // If authenticated, use user from token
+        if (req.user && req.user._id) {
+            userId = req.user._id;
+            const user = await User.findById(userId);
+            name = user ? user.name : name;
+        }
+
+        const { blog, content } = req.body;
+
+        if (!blog || !content) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing required fields"
+            });
+        }
+
         await Comment.create({
-            blog, name, content
-        })
+            blog,
+            name,
+            content,
+            user: userId
+        });
+
         res.json({
             success: true,
             message: "Comment added for review"
-        })
+        });
     } catch (error) {
         res.json({
             success: false,
             message: error.message
-        })
+        });
     }
 }
 

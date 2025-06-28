@@ -1,11 +1,10 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Sidebar from '../../components/admin/Sidebar';
+import UserSidebar from '../../components/user/UserSidebar';
 import { useAppContext } from '../../../context/AppContext';
 
 const Layout = () => {
-
 
     const {axios, setToken, setIsAdmin, navigate} = useAppContext()
 
@@ -26,11 +25,11 @@ const Layout = () => {
     cursor-pointer'>Logout</button>
     </div>
     <div className='flex h-[calc(100vh-70px)]'>
-        <Sidebar/>
+        <UserSidebar/>
         <Outlet/>
     </div>
     </>
   )
 }
 
-export default Layout
+export default Layout 
