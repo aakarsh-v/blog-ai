@@ -2,7 +2,7 @@ import React from 'react'
 import {assets} from '../assets/assets'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/AppContext';
-import blogLogo from '../assets/blogicon.png'
+import blogLogo from '../assets/BlogIcon.png'
 
 const Navbar = () => {
 
