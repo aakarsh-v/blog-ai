@@ -27,13 +27,8 @@ const Comments = () => {
         <div className='flex justify-between items-center max-w-3xl'>
             <h1>Comments</h1>
             <div className='flex gap-4'>
-                <button onClick={()=>setFiler('Approved')}className={`shadow-custom-sm border rounded-full px-4 py-1 
-                    cursor-pointer text-xs ${filter ==='Approved' ? 'text-primary' :
-                    'text-gray-700'}`}>Approved</button>
-
-                <button onClick={()=>setFiler('Not Approved')}className={`shadow-custom-sm border rounded-full px-4 py-1 
-                    cursor-pointer text-xs ${filter ==='Not Approved' ? 'text-primary' :
-                    'text-gray-700'}`}>Not Approved</button>    
+                <button onClick={()=>setFiler('Approved')}className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${filter ==='Approved' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-slate-700 border-slate-200 bg-white'}`}>Approved</button>
+                <button onClick={()=>setFiler('Not Approved')}className={`shadow-custom-sm border rounded-full px-4 py-1 cursor-pointer text-xs ${filter ==='Not Approved' ? 'text-emerald-600 border-emerald-200 bg-emerald-50' : 'text-slate-700 border-slate-200 bg-white'}`}>Not Approved</button>    
             </div>
         </div>
         <div className='relative h-4/5 max-w-3xl overflow-x-auto mt-4 bg-white shadow

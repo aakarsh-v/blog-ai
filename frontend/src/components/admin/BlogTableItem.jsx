@@ -52,7 +52,7 @@ const BlogTableItem = ({blog, fetchBlogs, index}) => {
         >{blog.isPublished ? 'Published' : 'Unpublished'}</p>
       </td>
       <td className='px-2 py-4 flex text-xs gap-3'>
-        <button onClick={togglePublish} className='border px-2 py-0.5 mt-1 rounded cursor-pointer'>
+        <button onClick={togglePublish} className='border px-2 py-0.5 mt-1 rounded cursor-pointer bg-emerald-600 hover:bg-emerald-500 text-white'>
             {blog.isPublished ? 'Unpublish' : 'Publish'}
         </button>
         <img onClick={deleteBlog} src={assets.cross_icon} className = "w-8 hover:scale-110 transition-all cursor-pointer" alt="" />

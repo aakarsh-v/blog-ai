@@ -44,7 +44,7 @@ const UserBlogTableItem = ({blog, fetchBlogs, index}) => {
       <td className='px-2 py-4 max-sm:hidden'>{blogDate.toLocaleDateString()}</td>
       <td className='px-2 py-4 max-sm:hidden'>
         <span className={`px-3 py-1 rounded-full text-xs ${
-          isPublished ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'
+          isPublished ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'
         }`}>
           {isPublished ? 'Published' : 'Draft'}
         </span>

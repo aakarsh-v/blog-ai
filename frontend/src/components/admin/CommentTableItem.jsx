@@ -54,9 +54,7 @@ const CommentTableItem = ({comment, fetchComments}) => {
         <div className='inline-flex items-center gap-4'>
             {!comment.isApproved ? 
             <img onClick={approveComment} src={assets.tick_icon} className='w-5 hover:scale-110
-            transition-all cursor-pointer'/> : <p className='text-xs border
-            border-green-600 bg-green-100 text-green-600 rounded-full px-3
-            py-1'>Approved</p>}
+            transition-all cursor-pointer'/> : <p className='text-xs border bg-emerald-100 text-emerald-700 rounded-full px-3 py-1'>Approved</p>}
             <img onClick={deleteComment} src={assets.bin_icon} alt="" className='w-5 hover:scale-110
             transition-all cursor-pointer'/>
         </div>

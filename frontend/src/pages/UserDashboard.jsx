@@ -3,6 +3,7 @@ import { assets } from '../assets/assets'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import blogLogo from '../assets/BlogIcon.png'
 
 const UserDashboard = () => {
     const [dashboardData, setDashboardData] = useState({
@@ -44,7 +45,7 @@ const UserDashboard = () => {
         <div className='min-h-screen bg-blue-50/50'>
             {/* Header */}
             <div className='flex items-center justify-between py-4 px-6 sm:px-12 border-b border-gray-200 bg-white'>
-                <img src={assets.logo} className='w-32 sm:w-40 cursor-pointer' 
+                <img src={blogLogo} className='w-32 sm:w-40 cursor-pointer' 
                 onClick={()=> navigate('/')} alt="" />
                 <div className='flex items-center gap-4'>
                     <button onClick={() => navigate('/')} className='text-sm px-6 py-2 bg-gray-100 text-gray-700 rounded-full cursor-pointer hover:bg-gray-200 transition-all'>

@@ -9,8 +9,7 @@ const Newsletter = () => {
         <input className='border border-gray-300 rounded-md h-full border-r-0
         outline-none w-full rounded-r-none px-3 text-gray-500'
         type='text' placeholder='Enter your email id' required/>
-        <button type='submit' className='md:px-12 px-8 h-full text-white bg-primary/80
-        hover:bg-primary transition-all cursor-pointer rounded-md'>Subscribe!</button>
+        <button type='submit' className='md:px-12 px-8 h-full text-white bg-emerald-600 hover:bg-emerald-500 transition-all cursor-pointer rounded-md'>Subscribe!</button>
       </form>
     </div>
   )

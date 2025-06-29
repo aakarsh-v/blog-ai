@@ -29,11 +29,11 @@ const Signup = () => {
 
   return (
     <div className='flex items-center justify-center h-screen'>
-      <div className='w-full max-w-sm p-6 max-md:m-6 border border-primary/30 shadow-xl shadow-primary/15 rounded-lg'>
+      <div className='w-full max-w-sm p-6 max-md:m-6 border border-emerald-200 shadow-xl shadow-emerald-100 rounded-lg'>
         <div className='flex flex-col items-center justify-center'>
           <div className='w-full py-6 text-center'>
             <h1 className='text-3xl font-bold'>
-              <span className='text-primary'>Create</span> Account
+              <span className='text-emerald-600'>Create</span> Account
             </h1>
             <p className='font-light'>Join us today!</p>
           </div>
@@ -74,14 +74,14 @@ const Signup = () => {
             </div>
             <button
               type='submit'
-              className='w-full py-3 font-medium bg-primary text-white rounded cursor-pointer hover:bg-primary/90 transition-all'
+              className='w-full py-3 font-medium bg-emerald-600 hover:bg-emerald-500 text-white rounded cursor-pointer transition-all'
             >
               Sign Up
             </button>
           </form>
           <p className='text-sm mt-4'>
             Already have an account?{' '}
-            <Link to='/login' className='text-primary hover:underline'>
+            <Link to='/login' className='text-emerald-600 hover:underline'>
               Log in
             </Link>
           </p>

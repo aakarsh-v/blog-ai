@@ -33,11 +33,11 @@ const Login = () => {
 
   return (
     <div className='flex items-center justify-center h-screen'>
-      <div className='w-full max-w-sm p-6 max-md:m-6 border border-primary/30 shadow-xl shadow-primary/15 rounded-lg'>
+      <div className='w-full max-w-sm p-6 max-md:m-6 border border-emerald-200 shadow-xl shadow-emerald-100 rounded-lg'>
         <div className='flex flex-col items-center justify-center'>
           <div className='w-full py-6 text-center'>
             <h1 className='text-3xl font-bold'>
-              <span className='text-primary'>User</span> Login
+              <span className='text-emerald-600'>User</span> Login
             </h1>
             <p className='font-light'>Enter your credentials to log in</p>
           </div>
@@ -67,20 +67,20 @@ const Login = () => {
             </div>
             <button
               type='submit'
-              className='w-full py-3 font-medium bg-primary text-white rounded cursor-pointer hover:bg-primary/90 transition-all'
+              className='w-full py-3 font-medium bg-emerald-600 hover:bg-emerald-500 text-white rounded cursor-pointer transition-all'
             >
               Login
             </button>
           </form>
           <p className='text-sm mt-4'>
             Don't have an account?{' '}
-            <Link to='/signup' className='text-primary hover:underline'>
+            <Link to='/signup' className='text-emerald-600 hover:underline'>
               Sign up
             </Link>
           </p>
           <button
             type='button'
-            className='mt-4 w-full py-2 border border-primary text-primary rounded hover:bg-primary/10 transition-all'
+            className='mt-4 w-full py-2 border border-emerald-200 text-emerald-600 rounded hover:bg-emerald-50 transition-all'
             onClick={() => navigate('/admin')}
           >
             Admin? Click here
