@@ -1,6 +1,6 @@
 import React from 'react'
 import { assets, footer_data } from '../assets/assets'
-import blogLogo from '../assets/blogicon.png'
+import blogLogo from '../assets/BlogIcon.png'
 
 const Footer = () => {
   return (
