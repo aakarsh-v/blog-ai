@@ -156,11 +156,12 @@ const approveCommentById = async(req, res) => {
     try {
         const {id} = req.body;
         const comment = await Comment.findOne({_id: id});
-        if(comment.user.toString() !== req.user._id){
+        const blog = await Blog.findById(comment.blog);
+        if (!blog || blog.user.toString() !== req.user._id) {
             return res.status(403).json({
                 success: false,
                 message: "You are not authorized to approve this comment"
-            })
+            });
         }
         await Comment.findByIdAndUpdate(id, {
             isApproved: true
