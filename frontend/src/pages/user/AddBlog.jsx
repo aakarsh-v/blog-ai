@@ -124,7 +124,7 @@ const AddBlog = () => {
             onChange={ (e) => setIsPublished(e.target.checked)}/>
           </div>
 
-          <button disabled={isAdding}type='submit' className='mt-8 w-40 h-10 bg-primary text-white
+          <button disabled={isAdding}type='submit' className='mt-8 w-40 h-10 bg-emerald-600 text-white
           rounded cursor-pointer text-sm'>{isAdding ? 'Adding...' : 'Add Blog'}</button>
         </div>  
         </div>
